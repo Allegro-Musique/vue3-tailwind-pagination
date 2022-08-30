@@ -1,12 +1,12 @@
 {
-  "name": "vue3tailwindpagination",
+  "name": "Vue3TailwindCSSPagination",
   "files": ["dist"],
-  "main": "./dist/vue3-tailwind-pagination.umd.js",
-  "module": "./dist/vue3-tailwind-pagination.es.js",
+  "main": "./dist/vue3-tailwindcss-pagination.umd.js",
+  "module": "./dist/vue3-tailwindcss-pagination.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vue3-tailwind-pagination.es.js",
-      "require": "./dist/vue3-tailwind-pagination.umd.js"
+      "import": "./dist/vue3-tailwindcss-pagination.es.js",
+      "require": "./dist/vue3-tailwindcss-pagination.umd.js"
     }
   },
   "version": "0.0.1",

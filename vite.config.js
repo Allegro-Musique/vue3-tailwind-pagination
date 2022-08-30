@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/components/index.js'),
-      name: 'Vue3TailwindPagination',
-      fileName: (format) => `vue3-tailwind-pagination.${format}.js`,
+      name: 'Vue3TailwindCSSPagination',
+      fileName: (format) => `vue3-tailwindcss-pagination.${format}.js`,
     },
     rollupOptions: {
       external: ['vue'],
