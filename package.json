@@ -1,5 +1,5 @@
 {
-  "name": "Vue3TailwindCSSPagination",
+  "name": "vue-3-tailwind-css-pagination",
   "files": ["dist"],
   "main": "./dist/vue3-tailwindcss-pagination.umd.js",
   "module": "./dist/vue3-tailwindcss-pagination.es.js",
