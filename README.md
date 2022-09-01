@@ -1,7 +1,55 @@
-# Vue 3 + Vite
+# Vue 3 Tailwind Css Pagination
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A Vue 3 Tailwind css component for pagination.
+## Demo
 
-## Recommended IDE Setup
+![alt text](./public/pagination.gif "Vue 3 Tailwind Css pagination")
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## Installation
+
+// with npm
+
+`npm i vue-3-tailwind-css-pagination`
+
+## Getting Started
+
+### Import component
+
+```js
+import {createApp} from 'vue'
+import {Vue3TailwindPagination} from "vue-3-tailwind-css-pagination";
+
+const app = createApp(App)
+app.component('Vue3TailwindPagination', Vue3TailwindPagination)
+
+app.mount('#app')
+```
+
+### How to use
+
+```html
+<vue3-tailwind-pagination 
+        :total="79" :per_page="5"
+        :active_color="'text-white'"
+        :active_background="'bg-red-500'"
+        :current_page="pagination.page"
+        @change="getPaysheet"/>
+```
+
+### Props and attributes
+
+| Id                |  type  |       Default |          Description |
+|:------------------|:------:|--------------:|---------------------:|
+| total             | Number |            79 | Total count of pages |
+| current_page      | Number |             1 |         Current page |
+| per_page          | Number |             5 |      Number per page |
+| background        | String |   bg-gray-200 |                    - |
+| active_background | String |   bg-gray-900 |                    - |
+| color             | String | text-gray-500 |                    - |
+| active_color      | String |    text-white |                    - |
+
+### Events
+
+| Id     | Output |                            Description |
+|:-------|:------:|---------------------------------------:|
+| change | Number |      The current page has been updated |

@@ -8,7 +8,7 @@ export default {
   },
   setup() {
     const page = ref(1)
-    const total = ref(75)
+    const total = ref(79)
 
     // expose to template and other options API hooks
     return {
@@ -26,5 +26,5 @@ export default {
 </script>
 
 <template>
- <vue3-tailwind-pagination :total="total" :current_page="page" @change="onChange" />
+ <vue3-tailwind-pagination :total="total" :per_page="5" :current_page="page" @change="onChange" />
 </template>

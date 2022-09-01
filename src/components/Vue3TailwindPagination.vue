@@ -37,7 +37,7 @@
             </a>
           </span>
 
-          <a @click="more()" class="relative inline-flex cursor-pointer mr-2 items-center px-4 py-2 text-sm font-medium text-gray-700" v-if="hasLast()">...</a>
+          <a @click="more()" class="relative inline-flex cursor-pointer mr-2 items-center px-4 py-2 text-sm font-medium text-gray-700" v-if="showLast()">...</a>
 
           <span v-if="hasLast()">
             <a :class="`relative inline-flex items-center mr-2 px-4 py-2 rounded-full cursor-pointer shadow-sm ${background} text-sm font-medium ${color}`" @click.prevent="changePage(total_pages)">
@@ -73,11 +73,11 @@ export default {
     },
     total: {
       type: Number,
-      default: 1
+      default: 79
     },
     per_page: {
       type: Number,
-      default: 10
+      default: 5
     },
     background: {
       type: String,
@@ -113,25 +113,15 @@ export default {
       return this.rangeStart !== 1
     },
     hasLast: function () {
-      return this.rangeEnd < this.total_pages
+      return this.rangeEnd  < this.total_pages
     },
-    hasPrev: function () {
-      return this.current_page > 1
-    },
-    hasNext: function () {
-      return this.current_page <= this.total_pages
+    showLast: function () {
+      return this.rangeEnd  < this.total_pages && this.total_pages - this.current_page > 2
     },
     changePage: function (page) {
-      console.log('page', page)
       if (page > 0 && page <= this.total_pages) {
         this.$emit('change', page)
       }
-    },
-    goNextPage: function () {
-      this.current_page + 1
-    },
-    goPrevPage: function () {
-      this.current_page - 1
     },
     more() {
       this.changePage(this.current_page + this.page_range)
@@ -150,23 +140,15 @@ export default {
     },
     rangeStart: function () {
       const start = this.current_page - this.page_range + 1
-      console.log('start', start, 'range', this.page_range)
       return (start > 0 && start != this.page_range) ? start : 1
-
-
-
     },
     rangeEnd: function () {
-      const end = this.current_page + this.page_range
-      console.log("end", end, "range", this.page_range)
-      return (end + 1 < this.total_pages) ? end : this.total_pages
+      const end = this.current_page + this.page_range - 1
+      return (end + 1 <= this.total_pages) ? end : this.total_pages
     },
     total_pages: function () {
-
       return this.per_page >= 1 ? Math.ceil(this.total / this.per_page) : Math.ceil(this.total / 10)
     },
-    nextPage: function () {return this.current_page + 1},
-    prevPage: function () {return this.current_page - 1}
   }
 }
 </script>
