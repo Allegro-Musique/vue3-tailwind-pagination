@@ -1,5 +1,6 @@
 {
   "name": "vue-3-tailwind-css-pagination",
+  "author": "Oumar MAREGA",
   "files": [
     "dist"
   ],
@@ -27,5 +28,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
     "vite": "^3.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Allegro-Musique/vue3-tailwind-pagination"
   }
 }
