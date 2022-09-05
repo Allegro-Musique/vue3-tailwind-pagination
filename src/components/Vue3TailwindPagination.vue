@@ -1,7 +1,7 @@
 <template>
   <div v-if="total_pages > 1"
        class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+    <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
       <span v-if="show_text">
         <p class="text-sm text-gray-700">
           {{ text.one }}
