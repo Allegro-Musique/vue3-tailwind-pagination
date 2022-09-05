@@ -1,6 +1,6 @@
 <template>
   <div v-if="total_pages > 1"
-       class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+       class="bg-white px-4 py-3 flex text-xs items-center justify-between sm:px-6">
     <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
       <span v-if="show_text">
         <p class="text-sm text-gray-700">
@@ -15,7 +15,7 @@
       </span>
       <div>
         <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
-         <span>
+         <span class="hidden sm:block">
             <a @click="changePage(1)"
                :class="`relative mr-2 inline-flex rounded-full shadow-sm items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -84,7 +84,7 @@
           </a>
           </span>
 
-          <span>
+          <span class="hidden sm:block">
             <a @click="changePage(total_pages)"
                :class="`relative inline-flex items-center px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium ${color} ${background}`">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"
