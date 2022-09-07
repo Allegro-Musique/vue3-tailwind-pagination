@@ -15,7 +15,7 @@
       </span>
       <div>
         <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
-         <span class="hidden sm:block">
+         <span class="hidden lg:block">
             <a @click="changePage(1)"
                :class="`relative mr-2 inline-flex rounded-full shadow-sm items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -39,7 +39,7 @@
           </span>
 
           <span v-if="hasFirst()">
-            <a :class="`relative cursor-pointer inline-flex items-center rounded-full mr-2 shadow-sm px-4 py-2 ${background} text-sm font-medium ${color}`"
+            <a :class="`relative cursor-pointer inline-flex items-center rounded-full mr-2 shadow-sm px-4 py-2 border ${border_color} ${background} text-sm font-medium ${color}`"
                @click.prevent="changePage(1)">
               <span>
                 1
@@ -64,7 +64,7 @@
              v-if="showLast()">...</a>
 
           <span v-if="hasLast()">
-            <a :class="`relative inline-flex items-center mr-2 px-4 py-2 rounded-full cursor-pointer shadow-sm ${background} text-sm font-medium ${color}`"
+            <a :class="`relative inline-flex items-center mr-2 px-4 py-2 rounded-full cursor-pointer shadow-sm border ${border_color} ${background} text-sm font-medium ${color}`"
                @click.prevent="changePage(total_pages)">
               <span>
                 {{ total_pages }}
@@ -74,7 +74,7 @@
 
           <span>
             <a @click="changePage(current_page + 1)"
-               :class="`relative inline-flex items-center mr-2 px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium ${color} ${background}`">
+               :class="`relative inline-flex items-center mr-2 px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium border ${border_color} ${color} ${background}`">
             <span class="sr-only">Next</span>
             <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd"
@@ -84,9 +84,9 @@
           </a>
           </span>
 
-          <span class="hidden sm:block">
+          <span class="hidden lg:block">
             <a @click="changePage(total_pages)"
-               :class="`relative inline-flex items-center px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium ${color} ${background}`">
+               :class="`relative inline-flex items-center px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium border ${border_color} ${color} ${background}`">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="w-5 h-5 cursor-pointer">
               <path stroke-linecap="round" stroke-linejoin="round"
