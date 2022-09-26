@@ -1,7 +1,56 @@
 <template>
   <div v-if="total_pages > 1"
        class="bg-white px-4 py-3 flex text-xs items-center justify-between sm:px-6">
-    <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+    <div class="flex-1 flex justify-between sm:hidden">
+      <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
+         <span>
+            <a @click="changePage(1)"
+               :class="`relative mr-1 inline-flex rounded-full cursor-pointer shadow-sm text-sm items-center px-1 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
+            First
+          </a>
+         </span>
+
+        <span>
+            <a @click="changePage(current_page - 1)"
+               :class="`relative mr-1 inline-flex rounded-full shadow-sm text-sm items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
+            <span class="sr-only">Previous</span>
+            <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd"
+                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                    clip-rule="evenodd"/>
+            </svg>
+          </a>
+          </span>
+
+        <span v-for="(page, index) in reducedData" :key="index">
+            <a :class="[current_page == page ? `${active_background} ${active_color} border ${active_border_color}` :  `${background} border ${border_color}`]"
+               class="relative inline-flex items-center mr-1 px-4 py-2 rounded-full cursor-pointer shadow-sm bg-white text-sm text-gray-700"
+               @click.prevent="changePage(page)">
+                <span :class="[current_page == page ? 'text-white' :  '']">{{ page }}</span>
+            </a>
+          </span>
+
+        <span>
+            <a @click="changePage(current_page + 1)"
+               :class="`relative inline-flex items-center mr-1 px-2 py-2 rounded-full shadow-sm bg-white text-sm border ${border_color} ${color} ${background}`">
+            <span class="sr-only">Next</span>
+            <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd"/>
+            </svg>
+          </a>
+          </span>
+
+        <span>
+            <a @click="changePage(total_pages)"
+               :class="`relative inline-flex items-center cursor-pointer px-1 py-2 rounded-full shadow-sm bg-white text-sm border ${border_color} ${color} ${background}`">
+            Last
+          </a>
+          </span>
+      </nav>
+    </div>
+    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
       <span v-if="show_text">
         <p class="text-sm text-gray-700">
           {{ text.one }}
@@ -62,16 +111,6 @@
           <a @click="more()"
              class="relative inline-flex cursor-pointer mr-2 items-center px-4 py-2 text-sm font-medium text-gray-700"
              v-if="showLast()">...</a>
-
-          <span v-if="hasLast()">
-            <a :class="`relative inline-flex items-center mr-2 px-4 py-2 rounded-full cursor-pointer shadow-sm border ${border_color} ${background} text-sm font-medium ${color}`"
-               @click.prevent="changePage(total_pages)">
-              <span>
-                {{ total_pages }}
-              </span>
-            </a>
-          </span>
-
           <span>
             <a @click="changePage(current_page + 1)"
                :class="`relative inline-flex items-center mr-2 px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium border ${border_color} ${color} ${background}`">
@@ -186,6 +225,9 @@ export default {
         pages.push(i)
       }
       return pages
+    },
+    reducedData: function () {
+      return this.pages[this.pages.length - 1] > 3 ? this.pages.slice(1) : this.pages;
     },
     rangeStart: function () {
       const start = this.current_page - this.page_range + 1
