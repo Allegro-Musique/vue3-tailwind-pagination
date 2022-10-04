@@ -1,7 +1,7 @@
 <template>
   <div v-if="total_pages > 1"
        class="bg-white px-4 py-3 flex text-xs items-center justify-between sm:px-6">
-    <div class="flex-1 flex justify-between sm:hidden block">
+    <div class="flex-1 flex justify-between md:hidden block">
       <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
          <span>
             <a @click="changePage(1)"
@@ -62,9 +62,9 @@
           {{ text.four }}
         </p>
       </span>
-      <div>
+      <div class="invisible md:visible">
         <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
-         <span class="hidden md:block">
+         <span>
             <a @click="changePage(1)"
                :class="`relative mr-2 inline-flex rounded-full shadow-sm items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -123,7 +123,7 @@
           </a>
           </span>
 
-          <span class="hidden md:block">
+          <span>
             <a @click="changePage(total_pages)"
                :class="`relative inline-flex items-center px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium border ${border_color} ${color} ${background}`">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"
