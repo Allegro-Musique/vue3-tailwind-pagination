@@ -1,7 +1,7 @@
 <template>
   <div v-if="total_pages > 1"
        class="bg-white px-4 py-3 flex text-xs items-center justify-between sm:px-6">
-    <div class="flex-1 flex justify-between sm:hidden">
+    <div class="flex-1 flex justify-between sm:hidden block">
       <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
          <span>
             <a @click="changePage(1)"
