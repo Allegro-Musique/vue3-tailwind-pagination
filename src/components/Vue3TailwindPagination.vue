@@ -1,55 +1,51 @@
 <template>
-  <div v-if="total_pages > 1"
-       class="bg-white px-4 py-3 flex text-xs items-center justify-between sm:px-6">
+  <div v-if="total_pages > 1" class="bg-white px-4 py-3 flex text-xs items-center justify-between sm:px-6">
     <div class="flex-1 flex justify-between md:hidden block">
       <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
-         <span>
-            <a @click="changePage(1)"
-               :class="`relative mr-1 inline-flex rounded-full cursor-pointer shadow-sm text-sm items-center px-1 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
+        <span>
+          <a @click="changePage(1)"
+             :class="`relative mr-1 inline-flex rounded-full cursor-pointer shadow-xs text-sm items-center px-1 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
             First
           </a>
-         </span>
+        </span>
 
         <span>
-            <a @click="changePage(current_page - 1)"
-               :class="`relative mr-1 inline-flex rounded-full shadow-sm text-sm items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
+          <a @click="changePage(current_page - 1)"
+             :class="`relative mr-1 inline-flex rounded-full shadow-xs text-sm items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
             <span class="sr-only">Previous</span>
             <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd"
-                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                    clip-rule="evenodd"/>
+              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
           </a>
-          </span>
+        </span>
 
         <span v-for="(page, index) in reducedData" :key="index">
-            <a :class="[current_page == page ? `${active_background} ${active_color} border ${active_border_color}` :  `${background} border ${border_color}`]"
-               class="relative inline-flex items-center mr-1 px-4 py-2 rounded-full cursor-pointer shadow-sm bg-white text-sm text-gray-700"
-               @click.prevent="changePage(page)">
-                <span :class="[current_page == page ? 'text-white' :  '']">{{ page }}</span>
-            </a>
-          </span>
+          <a :class="[current_page === page ? `${active_background} ${active_color} border ${active_border_color}` : `${background} border ${border_color}`]"
+             class="relative inline-flex items-center mr-1 px-4 py-2 rounded-full cursor-pointer shadow-xs text-sm"
+             @click.prevent="changePage(page)">
+            <span :class="[current_page === page ? 'text-white' : '']">{{ page }}</span>
+          </a>
+        </span>
 
         <span>
-            <a @click="changePage(current_page + 1)"
-               :class="`relative inline-flex items-center mr-1 px-2 py-2 rounded-full shadow-sm bg-white text-sm border ${border_color} ${color} ${background}`">
+          <a @click="changePage(current_page + 1)"
+             :class="`relative inline-flex items-center mr-1 px-2 py-2 rounded-full shadow-xs text-sm border ${border_color} ${color} ${background}`">
             <span class="sr-only">Next</span>
             <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"/>
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
             </svg>
           </a>
-          </span>
+        </span>
 
         <span>
-            <a @click="changePage(total_pages)"
-               :class="`relative inline-flex items-center cursor-pointer px-1 py-2 rounded-full shadow-sm bg-white text-sm border ${border_color} ${color} ${background}`">
+          <a @click="changePage(total_pages)"
+             :class="`relative inline-flex items-center cursor-pointer px-1 py-2 rounded-full shadow-xs text-sm border ${border_color} ${color} ${background}`">
             Last
           </a>
-          </span>
+        </span>
       </nav>
     </div>
+
     <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
       <span v-if="show_text">
         <p class="text-sm text-gray-700">
@@ -62,37 +58,32 @@
           {{ text.four }}
         </p>
       </span>
+
       <div class="invisible md:visible">
         <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
-         <span>
+          <span>
             <a @click="changePage(1)"
-               :class="`relative mr-2 inline-flex rounded-full shadow-sm items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-5 h-5 cursor-pointer">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"/>
-            </svg>
-          </a>
-         </span>
+               :class="`relative mr-2 inline-flex rounded-full shadow-xs items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"/>
+              </svg>
+            </a>
+          </span>
 
           <span>
             <a @click="changePage(current_page - 1)"
-               :class="`relative mr-2 inline-flex rounded-full shadow-sm items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
-            <span class="sr-only">Previous</span>
-            <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd"
-                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                    clip-rule="evenodd"/>
-            </svg>
-          </a>
+               :class="`relative mr-2 inline-flex rounded-full shadow-xs items-center px-2 py-2 border ${border_color} ${background} text-sm font-medium ${color}`">
+              <span class="sr-only">Previous</span>
+              <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </a>
           </span>
 
           <span v-if="hasFirst()">
-            <a :class="`relative cursor-pointer inline-flex items-center rounded-full mr-2 shadow-sm px-4 py-2 border ${border_color} ${background} text-sm font-medium ${color}`"
+            <a :class="`relative cursor-pointer inline-flex items-center rounded-full mr-2 shadow-xs px-4 py-2 border ${border_color} ${background} text-sm font-medium ${color}`"
                @click.prevent="changePage(1)">
-              <span>
-                1
-              </span>
+              <span>1</span>
             </a>
           </span>
 
@@ -101,10 +92,10 @@
              v-if="hasFirst()">...</a>
 
           <span v-for="(page, index) in pages" :key="index">
-            <a :class="[current_page == page ? `${active_background} ${active_color} border ${active_border_color}` :  `${background} border ${border_color}`]"
-               class="relative inline-flex items-center mr-2 px-4 py-2 rounded-full cursor-pointer shadow-sm bg-white text-sm font-medium text-gray-700"
+            <a :class="[current_page === page ? `${active_background} ${active_color} border ${active_border_color}` : `${background} border ${border_color}`]"
+               class="relative inline-flex items-center mr-2 px-4 py-2 rounded-full cursor-pointer shadow-xs text-sm font-medium"
                @click.prevent="changePage(page)">
-                <span :class="[current_page == page ? 'text-white' :  '']">{{ page }}</span>
+              <span :class="[current_page === page ? 'text-white' : '']">{{ page }}</span>
             </a>
           </span>
 
@@ -113,33 +104,32 @@
              v-if="showLast()">...</a>
           <span>
             <a @click="changePage(current_page + 1)"
-               :class="`relative inline-flex items-center mr-2 px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium border ${border_color} ${color} ${background}`">
-            <span class="sr-only">Next</span>
-            <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"/>
-            </svg>
-          </a>
+               :class="`relative inline-flex items-center mr-2 px-2 py-2 rounded-full shadow-xs bg-white text-sm font-medium border ${border_color} ${color} ${background}`">
+              <span class="sr-only">Next</span>
+              <svg class="h-5 w-5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </a>
           </span>
 
           <span>
             <a @click="changePage(total_pages)"
-               :class="`relative inline-flex items-center px-2 py-2 rounded-full shadow-sm bg-white text-sm font-medium border ${border_color} ${color} ${background}`">
-            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-5 h-5 cursor-pointer">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"/>
-            </svg>
-          </a>
+               :class="`relative inline-flex items-center px-2 py-2 rounded-full shadow-xs text-sm font-medium border ${border_color} ${color} ${background}`">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"/>
+              </svg>
+            </a>
           </span>
         </nav>
       </div>
     </div>
   </div>
 </template>
-<script>
-export default {
+
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+
+export default defineComponent({
   name: 'Vue3TailwindPagination',
   data() {
     return {
@@ -188,58 +178,64 @@ export default {
       default: false
     },
     text: {
-      default: {
+      type: Object as PropType<{
+        one: string,
+        two: string,
+        three: string,
+        four: string
+      }>,
+      default: () => ({
         one: 'Enregirstrements',
         two: 'à',
         three: 'de',
         four: 'resultats'
-      }
-    },
+      })
+    }
   },
   methods: {
-    hasFirst: function () {
+    hasFirst(): boolean {
       return this.rangeStart !== 1
     },
-    hasLast: function () {
+    hasLast(): boolean {
       return this.rangeEnd < this.total_pages
     },
-    showLast: function () {
+    showLast(): boolean {
       return this.rangeEnd < this.total_pages && this.total_pages - this.current_page > 2
     },
-    changePage: function (page) {
+    changePage(page: number) {
       if (page > 0 && page <= this.total_pages) {
-        this.$emit('change', page)
+        this.$emit('change', page);
       }
     },
     more() {
-      this.changePage(this.current_page + this.page_range)
+      this.changePage(this.current_page + this.page_range);
     },
     less() {
-      this.changePage(this.current_page - this.page_range)
+      this.changePage(this.current_page - this.page_range);
     }
   },
   computed: {
-    pages: function () {
-      let pages = []
+    pages(): number[] {
+      let pages: number[] = [];
       for (let i = this.rangeStart; i <= this.rangeEnd; i++) {
-        pages.push(i)
+        pages.push(i);
       }
-      return pages
+      return pages;
     },
-    reducedData: function () {
+    reducedData(): number[] {
       return this.pages[this.pages.length - 1] > 3 ? this.pages.slice(1) : this.pages;
     },
-    rangeStart: function () {
-      const start = this.current_page - this.page_range + 1
-      return (start > 0 && start != this.page_range) ? start : 1
+    rangeStart(): number {
+      const start = this.current_page - this.page_range + 1;
+      return (start > 0 && start !== this.page_range) ? start : 1;
     },
-    rangeEnd: function () {
-      const end = this.current_page + this.page_range - 1
-      return (end + 1 <= this.total_pages) ? end : this.total_pages
+    rangeEnd(): number {
+      const end = this.current_page + this.page_range - 1;
+      return (end + 1 <= this.total_pages) ? end : this.total_pages;
     },
-    total_pages: function () {
-      return this.per_page >= 1 ? Math.ceil(this.total / this.per_page) : Math.ceil(this.total / 10)
+    total_pages(): number {
+      return this.per_page >= 1 ? Math.ceil(this.total / this.per_page) : Math.ceil(this.total / 10);
     },
   }
-}
+});
 </script>
